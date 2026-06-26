@@ -2,7 +2,8 @@
 
 This project implements a fully local, offline speech-to-text dictation utility for Windows powered by **Faster-Whisper**. It runs in the system tray, plays audio cue beeps, and automatically types transcribed text at your current cursor position using global hotkeys.
 
-## The Prompt to use: "Can you install this offline Whisper dictation utility on my PC from this GitHub repository: https://github.com/william-house/whisper-dictation? Please clone it to a reasonable directory in my user profile, run the install.ps1 script to set up the virtual environment, download the model, configure the startup shortcut, and then start the application."
+## The Prompt to use:
+- Can you install this offline Whisper dictation utility on my PC from this GitHub repository: https://github.com/william-house/whisper-dictation? Please clone it to a reasonable directory in my user profile, run the install.ps1 script to set up the virtual environment, download the model, configure the startup shortcut, and then start the application.
 
 ## Features
 - **Alt+C (Toggle Mode)**: Press once to start recording, press again to stop and transcribe.
