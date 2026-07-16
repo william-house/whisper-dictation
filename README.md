@@ -31,16 +31,22 @@ whisper-dictation/
 
 To install this on a new Windows computer:
 
-1. **Install Python 3.8 - 3.14**: Ensure Python is added to the system PATH.
-2. **Create folder**: Create a folder `C:\Users\<username>\whisper-dictation\` (or any directory of your choice).
-3. **Save files**: Recreate the four files (`requirements.txt`, `dictation.pyw`, `launch.vbs`, `install.ps1`) using the source code provided below.
-4. **Run the Installer**:
+1. **Create folder**: Create a folder `C:\Users\<username>\whisper-dictation\` (or any directory of your choice).
+2. **Save files**: Recreate the project files (`requirements.txt`, `dictation.pyw`, `launch.vbs`, `install.ps1`, and `_download_model.py`) using the source code provided below.
+3. **Run the Installer**:
    - Open PowerShell as a regular user (non-admin).
    - Run the following command:
      ```powershell
      Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; .\install.ps1
      ```
-5. **Reboot or Start**:
+   - The installer will:
+     - find a usable Python 3.9+ install if one already exists
+     - install Python 3.12 with `winget` if Python is missing
+     - create the virtual environment
+     - install all Python dependencies
+     - cache the Whisper model
+     - create the Startup shortcut
+4. **Reboot or Start**:
    - The installer automatically creates a Windows Startup shortcut.
    - You can start the tool immediately by double-clicking `launch.vbs`.
 
@@ -82,17 +88,8 @@ Write-Host '========================================' -ForegroundColor Cyan
 Write-Host '  Whisper Dictation - Installer' -ForegroundColor Cyan
 Write-Host '========================================' -ForegroundColor Cyan
 
-# Locate Python (adjust system paths if needed, or default to standard 'python')
-$pythonExe = 'python'
-if (-not (Get-Command $pythonExe -ErrorAction SilentlyContinue)) {
-    # Custom path check if global python isn't found
-    $pythonExe = "$env:LOCALAPPDATA\Python\pythoncore-3.14-64\python.exe"
-    if (-not (Test-Path $pythonExe)) {
-        Write-Host 'ERROR: Python was not found on this system.' -ForegroundColor Red
-        exit 1
-    }
-}
-Write-Host "[1/5] Python located: $pythonExe" -ForegroundColor Green
+# Locate or install Python
+# Prefer an existing Python 3.9+ install; otherwise install Python 3.12 with winget.
 
 # Create Virtual Environment
 $venvDir = Join-Path $scriptDir 'venv'
